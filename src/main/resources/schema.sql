@@ -1,11 +1,13 @@
 DROP TABLE IF EXISTS tutorials;
-CREATE TABLE tutorials (
-                                id LONG NOT NULL,
-                                title VARCHAR2(20) NOT NULL,
-                                description VARCHAR2(20) NOT NULL,
-                                published boolean NOT NULL,
-                                firstfecha TIMESTAMP NOT NULL,
-                                secondfecha TIMESTAMP NOT NULL,
-                                priority LONG NOT NULL,
-                                CONSTRAINT PRICES_PK PRIMARY KEY (id)
+CREATE TABLE tutorials
+(
+    BRAND_ID    LONG NOT NULL,
+    START_DATE TIMESTAMP NOT NULL,
+    END_DATE TIMESTAMP NOT NULL,
+    PRICE_LIST LONG NOT NULL,
+    PRODUCT_ID VARCHAR2(20) NOT NULL,
+    PRIORITY LONG NOT NULL,
+    PRICE FLOAT NOT NULL,
+    CURR VARCHAR2(20) NOT NULL,
+    CONSTRAINT tutorials_pk PRIMARY KEY (BRAND_ID, PRICE_LIST, PRODUCT_ID)
 );

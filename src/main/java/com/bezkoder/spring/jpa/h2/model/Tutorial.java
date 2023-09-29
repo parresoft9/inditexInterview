@@ -1,91 +1,124 @@
 package com.bezkoder.spring.jpa.h2.model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tutorials")
-public class Tutorial {
+@IdClass(value = TutorialPK.class)
+public class Tutorial{
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private long id;
+    @Id private Long brand_Id;
+    @Id private Long price_List;
+    @Id private String product_Id;
 
-  @Column(name = "title")
-  private String title;
+    @Column(name = "START_DATE") private LocalDateTime start_date;
+    @Column(name = "END_DATE") private LocalDateTime end_date;
 
-  @Column(name = "description")
-  private String description;
+    @Column(name = "PRICE_LIST") private long price_list;
+    @Column(name = "PRIORITY") private long priority;
+    @Column(name = "PRICE") private float price;
 
-  @Column(name = "published")
-  private boolean published;
+    @Column(name = "CURR") private String curr;
 
-  public LocalDateTime getStart(){
-    return start;
-  }
+    public Tutorial(){
 
-  public LocalDateTime getEnd(){
-    return end;
-  }
+    }
 
-  @Column(name = "firstfecha")
-  private LocalDateTime start;
-  @Column(name = "secondfecha")
-  private LocalDateTime end;
+    public Tutorial(Long brand_Id, Long price_List, String product_Id, LocalDateTime start_date, LocalDateTime end_date,
+            long price_list, long priority, float price, String curr){
+        this.brand_Id = brand_Id;
+        this.price_List = price_List;
+        this.product_Id = product_Id;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.price_list = price_list;
+        this.priority = priority;
+        this.price = price;
+        this.curr = curr;
+    }
 
-  @Column(name = "priority")
-  private long priority;
+    public Long getBrand_Id(){
+        return brand_Id;
+    }
 
-  public long getPriority(){
-    return priority;
-  }
+    public void setBrand_Id(Long brand_Id){
+        this.brand_Id = brand_Id;
+    }
 
-  public Tutorial() {
+    public Long getPrice_List(){
+        return price_List;
+    }
 
-  }
+    public void setPrice_List(Long price_List){
+        this.price_List = price_List;
+    }
 
-  public Tutorial(String title, String description, boolean published, LocalDateTime start, LocalDateTime end, long priority) {
-    this.title = title;
-    this.description = description;
-    this.published = published;
-    this.start = start;
-    this.end = end;
-    this.priority = priority;
-  }
+    public String getProduct_Id(){
+        return product_Id;
+    }
 
-  public long getId() {
-    return id;
-  }
+    public void setProduct_Id(String product_Id){
+        this.product_Id = product_Id;
+    }
 
-  public String getTitle() {
-    return title;
-  }
+    public LocalDateTime getStart_date(){
+        return start_date;
+    }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    public void setStart_date(LocalDateTime start_date){
+        this.start_date = start_date;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public LocalDateTime getEnd_date(){
+        return end_date;
+    }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+    public void setEnd_date(LocalDateTime end_date){
+        this.end_date = end_date;
+    }
 
-  public boolean isPublished() {
-    return published;
-  }
+    public long getPrice_list(){
+        return price_list;
+    }
 
-  public void setPublished(boolean isPublished) {
-    this.published = isPublished;
-  }
+    public void setPrice_list(long price_list){
+        this.price_list = price_list;
+    }
 
-  @Override
-  public String toString() {
-    return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
-  }
+    public long getPriority(){
+        return priority;
+    }
 
+    public void setPriority(long priority){
+        this.priority = priority;
+    }
+
+    public float getPrice(){
+        return price;
+    }
+
+    public void setPrice(float price){
+        this.price = price;
+    }
+
+    public String getCurr(){
+        return curr;
+    }
+
+    public void setCurr(String curr){
+        this.curr = curr;
+    }
+
+    @Override
+    public String toString(){
+        return "Tutorial{" + "brand_Id=" + brand_Id + ", price_List=" + price_List + ", product_Id='" + product_Id
+                + '\'' + ", start_date=" + start_date + ", end_date=" + end_date + ", price_list=" + price_list
+                + ", priority=" + priority + ", price=" + price + ", curr='" + curr + '\'' + '}';
+    }
 }

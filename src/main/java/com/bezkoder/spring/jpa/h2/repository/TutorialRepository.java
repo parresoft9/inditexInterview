@@ -8,12 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.bezkoder.spring.jpa.h2.model.Tutorial;
 
-public interface TutorialRepository extends JpaRepository<Tutorial, Long> {
-  List<Tutorial> findByPublished(boolean published);
+public interface TutorialRepository extends JpaRepository<Tutorial, Long>{
 
-  List<Tutorial> findByTitleContainingIgnoreCase(String title);
-
-  @Query(value = "SELECT e.* FROM tutorials e WHERE firstfecha <=:date AND secondfecha>=:date ORDER BY priority DESC", nativeQuery = true)
-  List<Tutorial> findByDateBetweenStartAndEnd(LocalDateTime date);
+    @Query(value = "SELECT e.* FROM tutorials e WHERE start_date <=:date AND end_date>=:date AND brand_Id =:brand_Id AND product_Id =:product_Id ORDER BY priority DESC", nativeQuery = true)
+    List<Tutorial> findPriceByDateProductAndBrand(LocalDateTime date, long brand_Id, String product_Id);
 
 }
