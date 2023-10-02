@@ -48,11 +48,7 @@ public class TutorialController{
     public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id){
         Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
 
-        if(tutorialData.isPresent()){
-            return new ResponseEntity<>(tutorialData.get(), HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return tutorialData.map(tutorial -> new ResponseEntity<>(tutorial, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/tutorials/find")
@@ -61,11 +57,7 @@ public class TutorialController{
             Optional<Tutorial> _tutorial = tutorialRepository.findPriceByDateProductAndBrand(
                             requestDTO.getFechaAplicacion(), requestDTO.getBrand_Id(), requestDTO.getProduct_Id()).stream()
                     .findFirst();
-            if(_tutorial.isPresent()){
-                return new ResponseEntity<>(_tutorial.get(), HttpStatus.CREATED);
-            }else{
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+            return _tutorial.map(tutorial -> new ResponseEntity<>(tutorial, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
         }catch(Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
